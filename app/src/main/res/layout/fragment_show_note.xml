@@ -7,13 +7,13 @@
     tools:context=".ShowNoteFragment">
 
     <TextView
-        android:id="@+id/noteName"
+        android:id="@+id/note_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/noteDescription"
+        android:id="@+id/note_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="30sp" />

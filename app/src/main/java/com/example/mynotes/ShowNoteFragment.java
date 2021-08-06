@@ -35,11 +35,11 @@ public class ShowNoteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_note, container, false);
 
-        TextView noteDescription = view.findViewById(R.id.noteDescription);
+        TextView noteDescription = view.findViewById(R.id.note_description);
         String[] description = getResources().getStringArray(R.array.description);
         noteDescription.setText(description[note.getNoteIndex()]);
 
-        TextView noteNameView = view.findViewById(R.id.noteName);
+        TextView noteNameView = view.findViewById(R.id.note_name);
         noteNameView.setText(note.getNoteName());
         return view;
     }

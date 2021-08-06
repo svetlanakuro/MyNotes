@@ -1,6 +1,5 @@
 package com.example.mynotes;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -34,6 +33,31 @@ public class NotesFragment extends Fragment {
         initList(view);
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        isLandscape = getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
+
+        if (savedInstanceState != null) {
+            currentNote = savedInstanceState.getParcelable(CURRENT_NOTE);
+        } else {
+            currentNote = new Note(0,
+                    getResources().getStringArray(R.array.notes)[0]);
+        }
+
+        if (isLandscape) {
+            showLandNote(currentNote);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(CURRENT_NOTE, currentNote);
+        super.onSaveInstanceState(outState);
+    }
+
     private void initList(View view) {
         LinearLayout layoutView = (LinearLayout) view;
         String[] notes = getResources().getStringArray(R.array.notes);
@@ -56,31 +80,6 @@ public class NotesFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelable(CURRENT_NOTE, currentNote);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        isLandscape = getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
-
-        if (savedInstanceState != null) {
-            currentNote = savedInstanceState.getParcelable(CURRENT_NOTE);
-        } else {
-            currentNote = new Note(0,
-                    getResources().getStringArray(R.array.notes)[0]);
-        }
-
-        if (isLandscape) {
-            showLandNote(currentNote);
-        }
-    }
-
     private void showNote(Note currentNote) {
         if (isLandscape) {
             showLandNote(currentNote);
@@ -94,15 +93,17 @@ public class NotesFragment extends Fragment {
 
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.noteDescription, detail);
+        fragmentTransaction.replace(R.id.note_description, detail);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
     }
 
     private void showPortNote(Note currentNote) {
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), ShowNoteActivity.class);
-        intent.putExtra(ShowNoteFragment.ARG_NOTE, currentNote);
-        startActivity(intent);
+        ShowNoteFragment detail = ShowNoteFragment.newInstance(currentNote);
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.notes_container, detail);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.commit();
     }
 }
