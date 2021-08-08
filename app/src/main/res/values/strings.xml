@@ -1,20 +1,18 @@
 <resources>
     <string name="app_name">MyNotes</string>
 
-    <string-array name="notes">
-        <item>Note1</item>
-        <item>Note2</item>
-        <item>Note3</item>
-        <item>Note4</item>
-        <item>Note5</item>
-    </string-array>
+    <string name="title1">Note one</string>
+    <string name="title2">Note two</string>
+    <string name="title3">Note three</string>
+    <string name="title4">Note four</string>
+    <string name="title5">Note five</string>
+    <string name="title6">Note six</string>
 
-    <string-array name="description">
-        <item>TextNote1</item>
-        <item>TextNote2</item>
-        <item>TextNote3</item>
-        <item>TextNote4</item>
-        <item>TextNote5</item>
-    </string-array>
+    <string name="description1">Description Note first</string>
+    <string name="description2">Description Note second</string>
+    <string name="description3">Description Note third</string>
+    <string name="description4">Description Note fourth</string>
+    <string name="description5">Description Note fifth</string>
+    <string name="description6">Description Note sixth</string>
 
 </resources>

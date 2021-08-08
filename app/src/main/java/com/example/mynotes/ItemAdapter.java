@@ -1,9 +1,9 @@
 package com.example.mynotes;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,43 +11,60 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private String[] dataSource;
-//    public static final String TAG = "ItemAdapter";
+    private NoteSource noteSource;
+    private OnItemClickListener listener;
 
-    public ItemAdapter(String[] dataSource) {
-        this.dataSource = dataSource;
+    public ItemAdapter(NoteSource noteSource) {
+        this.noteSource = noteSource;
+    }
+
+    public void setListener(@NonNull OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        Log.d(TAG, "onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ItemViewHolder holder, int position) {
-        holder.getTextView().setText(dataSource[position]);
-//        Log.d(TAG, "onBindViewHolder" + position);
+        holder.bind(noteSource.getNoteData(position));
+
     }
 
     @Override
     public int getItemCount() {
-        return dataSource.length;
+        return noteSource.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView textView;
+        private final TextView title;
+        private final TextView description;
+        private final CheckBox executed;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textView);
+            title = itemView.findViewById(R.id.title);
+            description = itemView.findViewById(R.id.description);
+            executed = itemView.findViewById(R.id.executed);
+
+            title.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
+
+            description.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
         }
 
-        public TextView getTextView() {
-            return textView;
+        public void bind(NoteData noteData) {
+            title.setText(noteData.getTitle());
+            description.setText(noteData.getDescription());
+            executed.setChecked(noteData.isExecuted());
         }
+    }
+
+    interface OnItemClickListener {
+        void onItemClick(int position);
     }
 }

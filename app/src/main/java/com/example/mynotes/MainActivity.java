@@ -1,10 +1,12 @@
 package com.example.mynotes;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,11 +17,18 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-        ItemAdapter adapter = new ItemAdapter(getResources().getStringArray(R.array.notes));
+        NoteSource noteSource = new NoteSourceImpl(this);
+
+        ItemAdapter adapter = new ItemAdapter(noteSource);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
+        recyclerView.setLayoutManager(new GridLayoutManager(this, spanCount));
+
+        adapter.setListener(position ->
+                Toast.makeText(this, "Click to " + noteSource.getNoteData(position).getDescription(), Toast.LENGTH_SHORT)
+                        .show());
     }
 }
