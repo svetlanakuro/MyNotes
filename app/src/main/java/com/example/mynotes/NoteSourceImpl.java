@@ -2,14 +2,16 @@ package com.example.mynotes;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class NoteSourceImpl implements NoteSource {
 
-    private Context context;
-    private NoteData[] notes;
+    private List<NoteData> notes;
 
     public NoteSourceImpl(Context context) {
-        this.context = context;
-        notes = new NoteData[]{
+        notes = new ArrayList<>(Arrays.asList(
                 new NoteData(
                         context.getResources().getString(R.string.title1),
                         context.getResources().getString(R.string.description1),
@@ -39,17 +41,36 @@ public class NoteSourceImpl implements NoteSource {
                         context.getResources().getString(R.string.title6),
                         context.getResources().getString(R.string.description6),
                         false
-                )
-        };
+                )));
     }
 
     @Override
     public NoteData getNoteData(int position) {
-        return notes[position];
+        return notes.get(position);
+    }
+
+    @Override
+    public void deleteNoteData(int position) {
+        notes.remove(position);
+    }
+
+    @Override
+    public void updateNoteData(int position, NoteData noteData) {
+        notes.set(position, noteData);
+    }
+
+    @Override
+    public void addNoteData(NoteData noteData) {
+        notes.add(noteData);
+    }
+
+    @Override
+    public void clearNoteData() {
+        notes.clear();
     }
 
     @Override
     public int size() {
-        return notes.length;
+        return notes.size();
     }
 }

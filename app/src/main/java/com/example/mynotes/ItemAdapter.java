@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
+    public static final int NO_POSITION = -1;
+    private int currentPosition = NO_POSITION;
     private NoteSource noteSource;
     private OnItemClickListener listener;
 
@@ -52,9 +54,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             description = itemView.findViewById(R.id.description);
             executed = itemView.findViewById(R.id.executed);
 
-            title.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
-
-            description.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
+            title.setOnClickListener(v -> listener.onItemClick(description, getLayoutPosition()));
         }
 
         public void bind(NoteData noteData) {
@@ -65,6 +65,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(@NonNull View view, int position);
     }
 }

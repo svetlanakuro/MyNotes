@@ -15,4 +15,9 @@
     <string name="description5">Description Note fifth</string>
     <string name="description6">Description Note sixth</string>
 
+    <string name="add">Add</string>
+    <string name="clear">Clear</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+
 </resources>

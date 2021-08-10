@@ -14,13 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.MyNotes.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+<!--    <style name="Theme.MyNotes.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
 
-    <style name="Theme.MyNotes.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+<!--    <style name="Theme.MyNotes.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />-->
 
-    <style name="Theme.MyNotes.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary" />
+<!--    <style name="Theme.MyNotes.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary" />-->
 
 </resources>
