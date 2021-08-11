@@ -32,6 +32,15 @@
             android:textSize="@dimen/textDescription"
             tools:text="@tools:sample/lorem/random" />
 
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="@dimen/viewMargin"
+            android:textSize="@dimen/textDescription"
+            tools:text="@tools:sample/date/ddmmyy" />
+
         <CheckBox
             android:id="@+id/executed"
             android:layout_width="wrap_content"

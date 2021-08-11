@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class NoteSourceImpl implements NoteSource {
@@ -15,32 +16,38 @@ public class NoteSourceImpl implements NoteSource {
                 new NoteData(
                         context.getResources().getString(R.string.title1),
                         context.getResources().getString(R.string.description1),
-                        false
+                        false,
+                        Calendar.getInstance().getTime()
                 ),
                 new NoteData(
                         context.getResources().getString(R.string.title2),
                         context.getResources().getString(R.string.description2),
-                        false
+                        false,
+                        Calendar.getInstance().getTime()
                 ),
                 new NoteData(
                         context.getResources().getString(R.string.title3),
                         context.getResources().getString(R.string.description3),
-                        false
+                        false,
+                        Calendar.getInstance().getTime()
                 ),
                 new NoteData(
                         context.getResources().getString(R.string.title4),
                         context.getResources().getString(R.string.description4),
-                        false
+                        false,
+                        Calendar.getInstance().getTime()
                 ),
                 new NoteData(
                         context.getResources().getString(R.string.title5),
                         context.getResources().getString(R.string.description5),
-                        false
+                        false,
+                        Calendar.getInstance().getTime()
                 ),
                 new NoteData(
                         context.getResources().getString(R.string.title6),
                         context.getResources().getString(R.string.description6),
-                        false
+                        false,
+                        Calendar.getInstance().getTime()
                 )));
     }
 

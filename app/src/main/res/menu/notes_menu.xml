@@ -7,7 +7,7 @@
         android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="10"
         android:title="@string/add"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_clear"
         android:icon="@android:drawable/ic_notification_clear_all"
