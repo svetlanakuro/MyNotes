@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,6 +27,7 @@ public class NoteFragment extends Fragment {
 
     private TextInputEditText title;
     private TextInputEditText description;
+    private CheckBox executed;
     private DatePicker datePicker;
 
     // Для редактирования данных
@@ -79,7 +81,7 @@ public class NoteFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        noteData = collectCardData();
+        noteData = collectNoteData();
     }
 
     // Здесь передадим данные в паблишер
@@ -89,17 +91,19 @@ public class NoteFragment extends Fragment {
         publisher.notifySingle(noteData);
     }
 
-    private NoteData collectCardData() {
+    private NoteData collectNoteData() {
         String title = Objects.requireNonNull(this.title.getText()).toString();
         String description = Objects.requireNonNull(this.description.getText()).toString();
         Date date = getDateFromDatePicker();
-        boolean executed;
+        boolean executed = this.executed.isChecked();
         if (noteData != null) {
-            executed = noteData.isExecuted();
+            NoteData answer;
+            answer = new NoteData(title, description, executed, date);
+            answer.setId(noteData.getId());
+            return answer;
         } else {
-            executed = false;
+            return new NoteData(title, description, false, date);
         }
-        return new NoteData(title, description, executed, date);
     }
 
     // Получение даты из DatePicker
@@ -115,11 +119,13 @@ public class NoteFragment extends Fragment {
         title = view.findViewById(R.id.inputTitle);
         description = view.findViewById(R.id.inputDescription);
         datePicker = view.findViewById(R.id.inputDate);
+        executed = view.findViewById(R.id.executed);
     }
 
     private void populateView() {
         title.setText(noteData.getTitle());
         description.setText(noteData.getDescription());
+        executed.setChecked(noteData.isExecuted());
         initDatePicker(noteData.getDate());
     }
 

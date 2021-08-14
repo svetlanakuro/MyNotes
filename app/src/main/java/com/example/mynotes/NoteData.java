@@ -6,10 +6,15 @@ import android.os.Parcelable;
 import java.util.Date;
 
 public class NoteData implements Parcelable {
+
+    private String id;
     private String title;
     private String description;
     private boolean executed;
     private Date date;
+
+    public NoteData() {
+    }
 
     public NoteData(String title, String description, boolean executed, Date date) {
         this.title = title;
@@ -49,6 +54,14 @@ public class NoteData implements Parcelable {
             return new NoteData[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

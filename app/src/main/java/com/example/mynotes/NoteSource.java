@@ -1,6 +1,9 @@
 package com.example.mynotes;
 
 public interface NoteSource {
+
+    NoteSource init(NoteSourceResponse response);
+
     NoteData getNoteData(int position);
 
     void deleteNoteData(int position);
