@@ -4,11 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/drawable/divider.xml" value="0.2722222222222222" />
-        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/activity_main.xml" value="0.22962962962962963" />
+        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/activity_main.xml" value="0.22407407407407406" />
+        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/fragment_note.xml" value="0.22407407407407406" />
         <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/fragment_note_edit.xml" value="0.1" />
-        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/fragment_notes.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/fragment_notes.xml" value="0.22407407407407406" />
         <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/item.xml" value="0.19907407407407407" />
         <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/layout/item_description.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/menu/note_menu.xml" value="0.22407407407407406" />
+        <entry key="..\:/AndroidStudioProjects/MyNotes/app/src/main/res/menu/notes_menu.xml" value="0.19907407407407407" />
       </map>
     </option>
   </component>

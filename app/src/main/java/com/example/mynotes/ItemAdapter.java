@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private NoteSource noteSource;
@@ -45,26 +47,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         private final TextView title;
         private final TextView description;
         private final CheckBox executed;
+        private TextView date;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.description);
             executed = itemView.findViewById(R.id.executed);
+            date = itemView.findViewById(R.id.date);
 
-            title.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
-
-            description.setOnClickListener(v -> listener.onItemClick(getAdapterPosition()));
+            title.setOnClickListener(v -> listener.onItemClick(description, getLayoutPosition()));
         }
 
         public void bind(NoteData noteData) {
             title.setText(noteData.getTitle());
             description.setText(noteData.getDescription());
             executed.setChecked(noteData.isExecuted());
+            date.setText(new SimpleDateFormat("dd-MM-yy").format(noteData.getDate()));
         }
     }
 
     interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(@NonNull View view, int position);
     }
 }

@@ -2,4 +2,5 @@
 <resources>
     <dimen name="textDescription">20sp</dimen>
     <dimen name="textTitle">42sp</dimen>
+    <dimen name="viewMargin">8dp</dimen>
 </resources>

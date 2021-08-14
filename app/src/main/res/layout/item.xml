@@ -5,7 +5,7 @@
     android:id="@+id/textView"
     android:layout_width="match_parent"
     android:layout_height="300dp"
-    android:layout_margin="8dp"
+    android:layout_margin="@dimen/viewMargin"
     app:cardCornerRadius="10dp"
     app:cardElevation="4dp">
 
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:padding="8dp"
+            android:padding="@dimen/viewMargin"
             android:textSize="@dimen/textTitle"
             tools:text="@tools:sample/lorem" />
 
@@ -28,9 +28,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
+            android:padding="@dimen/viewMargin"
             android:textSize="@dimen/textDescription"
             tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="@dimen/viewMargin"
+            android:textSize="@dimen/textDescription"
+            tools:text="@tools:sample/date/ddmmyy" />
 
         <CheckBox
             android:id="@+id/executed"
