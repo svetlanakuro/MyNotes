@@ -2,10 +2,12 @@ package com.example.mynotes;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.UUID;
@@ -75,8 +78,17 @@ public class MainActivity extends AppCompatActivity {
                 });
                 return true;
             case R.id.action_clear:
-                noteSource.clearNoteData();
-                adapter.notifyDataSetChanged();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Clear notes")
+                        .setMessage("Delete all notes?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            noteSource.clearNoteData();
+                            adapter.notifyDataSetChanged();
+                        })
+                        .setNegativeButton("No", (dialog, which) -> {
+                            Toast.makeText(MainActivity.this, "Notes not deleted", Toast.LENGTH_SHORT).show();
+                        })
+                        .show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -101,8 +113,16 @@ public class MainActivity extends AppCompatActivity {
                 });
                 return true;
             case R.id.action_delete:
-                noteSource.deleteNoteData(currentPosition);
-                adapter.notifyItemRemoved(currentPosition);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Delete note")
+                        .setMessage("Delete this note?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            noteSource.deleteNoteData(currentPosition);
+                            adapter.notifyItemRemoved(currentPosition);
+                        })
+                        .setNegativeButton("No", (dialog, which) ->
+                                Toast.makeText(MainActivity.this, "Note not deleted", Toast.LENGTH_SHORT).show())
+                        .show();
                 return true;
         }
         return super.onContextItemSelected(item);
