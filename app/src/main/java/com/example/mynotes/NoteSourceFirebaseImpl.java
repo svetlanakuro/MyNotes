@@ -26,7 +26,7 @@ public class NoteSourceFirebaseImpl implements NoteSource {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         notes = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
                             Map<String, Object> doc = document.getData();
                             String id = document.getId();
                             NoteData noteData = NoteDataMapping.toNoteData(id, doc);
