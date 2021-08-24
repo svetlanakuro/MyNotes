@@ -9,9 +9,15 @@ import java.util.List;
 
 public class NoteSourceImpl implements NoteSource {
 
+    private Context context;
     private List<NoteData> notes;
 
     public NoteSourceImpl(Context context) {
+        this.context = context;
+    }
+
+    @Override
+    public NoteSource init(NoteSourceResponse response) {
         notes = new ArrayList<>(Arrays.asList(
                 new NoteData(
                         context.getResources().getString(R.string.title1),
@@ -49,6 +55,11 @@ public class NoteSourceImpl implements NoteSource {
                         false,
                         Calendar.getInstance().getTime()
                 )));
+
+        if (response != null) {
+            response.initialized(this);
+        }
+        return this;
     }
 
     @Override

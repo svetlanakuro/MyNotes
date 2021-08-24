@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
         navigation = new Navigation(getSupportFragmentManager());
 
         recyclerView = findViewById(R.id.recyclerView);
-
-        noteSource = new NoteSourceImpl(this);
-
+        noteSource = new NoteSourceFirebaseImpl();
         adapter = new ItemAdapter(noteSource);
+
+        noteSource.init(noteSource -> adapter.notifyDataSetChanged());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -64,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                navigation.addFragment(NoteFragment.newInstance(new NoteData("new title", "new description note", false, Calendar.getInstance().getTime())), true);
-                publisher.subscribe(noteData -> {
-                    noteSource.addNoteData(noteData);
-                    adapter.notifyDataSetChanged();
+                NoteData noteData = new NoteData("new title", "new description note", false, Calendar.getInstance().getTime());
+                noteData.setId(UUID.randomUUID().toString());
+                navigation.addFragment(NoteFragment.newInstance(noteData), true);
+                publisher.subscribe(noteData1 -> {
+                    noteSource.addNoteData(noteData1);
                     adapter.notifyItemChanged(noteSource.size() - 1);
                     recyclerView.scrollToPosition(noteSource.size() - 1);
                 });
@@ -90,9 +92,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_update:
-                navigation.addFragment(NoteFragment.newInstance(noteSource.getNoteData(currentPosition)), true);
-                publisher.subscribe(noteData -> {
-                    noteSource.updateNoteData(currentPosition, noteData);
+                NoteData noteData = noteSource.getNoteData(currentPosition);
+                noteData.setId(noteSource.getNoteData(currentPosition).getId());
+                navigation.addFragment(NoteFragment.newInstance(noteData), true);
+                publisher.subscribe(noteData1 -> {
+                    noteSource.updateNoteData(currentPosition, noteData1);
                     adapter.notifyItemChanged(currentPosition);
                 });
                 return true;
