@@ -1,4 +1,4 @@
-package com.example.mynotes;
+package com.example.mynotes.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mynotes.data.NoteData;
+import com.example.mynotes.domain.NoteSource;
+import com.example.mynotes.R;
 
 import java.text.SimpleDateFormat;
 

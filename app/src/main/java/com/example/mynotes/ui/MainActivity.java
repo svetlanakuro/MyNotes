@@ -1,4 +1,4 @@
-package com.example.mynotes;
+package com.example.mynotes.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.mynotes.data.NoteData;
+import com.example.mynotes.domain.NoteSource;
+import com.example.mynotes.data.NoteSourceFirebaseImpl;
+import com.example.mynotes.utils.Publisher;
+import com.example.mynotes.R;
 
 import java.util.Calendar;
 import java.util.UUID;

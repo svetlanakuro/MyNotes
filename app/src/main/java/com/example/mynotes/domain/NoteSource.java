@@ -1,4 +1,6 @@
-package com.example.mynotes;
+package com.example.mynotes.domain;
+
+import com.example.mynotes.data.NoteData;
 
 public interface NoteSource {
 

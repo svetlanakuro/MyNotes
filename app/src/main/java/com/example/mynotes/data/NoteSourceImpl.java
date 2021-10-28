@@ -1,6 +1,10 @@
-package com.example.mynotes;
+package com.example.mynotes.data;
 
 import android.content.Context;
+
+import com.example.mynotes.domain.NoteSource;
+import com.example.mynotes.domain.NoteSourceResponse;
+import com.example.mynotes.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

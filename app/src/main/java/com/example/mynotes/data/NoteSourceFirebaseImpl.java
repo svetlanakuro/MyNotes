@@ -1,7 +1,9 @@
-package com.example.mynotes;
+package com.example.mynotes.data;
 
 import android.util.Log;
 
+import com.example.mynotes.domain.NoteSource;
+import com.example.mynotes.domain.NoteSourceResponse;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -9,7 +11,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class NoteSourceFirebaseImpl implements NoteSource {
 

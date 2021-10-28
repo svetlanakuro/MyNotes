@@ -1,4 +1,4 @@
-package com.example.mynotes;
+package com.example.mynotes.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 
+import com.example.mynotes.data.NoteData;
+import com.example.mynotes.utils.Publisher;
+import com.example.mynotes.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
