@@ -11,6 +11,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class NoteSourceFirebaseImpl implements NoteSource {
 
@@ -19,7 +20,7 @@ public class NoteSourceFirebaseImpl implements NoteSource {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection = db.collection(COLLECTION);
-    private List<NoteData> notes = new ArrayList<>();
+    private List<NoteDataKotlin> notes = new ArrayList<>();
 
     @Override
     public NoteSource init(NoteSourceResponse response) {
@@ -27,10 +28,10 @@ public class NoteSourceFirebaseImpl implements NoteSource {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         notes = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             Map<String, Object> doc = document.getData();
                             String id = document.getId();
-                            NoteData noteData = NoteDataMapping.toNoteData(id, doc);
+                            NoteDataKotlin noteData = NoteDataMapping.toNoteData(id, doc);
                             notes.add(noteData);
                         }
                         response.initialized(this);
@@ -44,39 +45,39 @@ public class NoteSourceFirebaseImpl implements NoteSource {
     }
 
     @Override
-    public NoteData getNoteData(int position) {
+    public NoteDataKotlin getNoteData(int position) {
         return notes.get(position);
     }
 
     @Override
     public void deleteNoteData(int position) {
-        collection.document(notes.get(position).getId()).delete();
+        collection.document(Objects.requireNonNull(notes.get(position).getId())).delete();
         notes.remove(position);
     }
 
     @Override
-    public void updateNoteData(int position, NoteData noteData) {
-        collection.document(noteData.getId()).set(NoteDataMapping.toDocument(noteData));
+    public void updateNoteData(int position, NoteDataKotlin noteData) {
+        collection.document(Objects.requireNonNull(noteData.getId())).set(NoteDataMapping.toDocument(noteData));
         notes.set(position, noteData);
     }
 
     @Override
-    public void addNoteData(NoteData noteData) {
+    public void addNoteData(NoteDataKotlin noteData) {
         collection.add(NoteDataMapping.toDocument(noteData)).addOnSuccessListener(documentReference -> noteData.setId(documentReference.getId()));
         notes.add(noteData);
     }
 
     @Override
     public void clearNoteData() {
-        for (NoteData noteData : notes) {
-            collection.document(noteData.getId()).delete();
+        for (NoteDataKotlin noteData : notes) {
+            collection.document(Objects.requireNonNull(noteData.getId())).delete();
         }
         notes.clear();
     }
 
     @Override
     public int size() {
-        if (notes == null){
+        if (notes == null) {
             return 0;
         }
         return notes.size();

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.mynotes.data.NoteData;
+import com.example.mynotes.data.NoteDataKotlin;
 import com.example.mynotes.domain.NoteSource;
 import com.example.mynotes.data.NoteSourceFirebaseImpl;
 import com.example.mynotes.utils.Publisher;
@@ -27,7 +28,7 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ItemAdapter adapter;
+    private ItemAdapterKotlin adapter;
     private NoteSource noteSource;
     private RecyclerView recyclerView;
     private int currentPosition;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         noteSource = new NoteSourceFirebaseImpl();
-        adapter = new ItemAdapter(noteSource);
+        adapter = new ItemAdapterKotlin(noteSource);
 
         noteSource.init(noteSource -> adapter.notifyDataSetChanged());
 
@@ -73,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                NoteData noteData = new NoteData("new title", "new description note", false, Calendar.getInstance().getTime());
+                NoteDataKotlin noteData = new NoteDataKotlin("new title", "new description note", false, Calendar.getInstance().getTime());
                 noteData.setId(UUID.randomUUID().toString());
-                navigation.addFragment(NoteFragment.newInstance(noteData), true);
+                navigation.addFragment(NoteFragmentKotlin.Companion.newInstance(noteData), true);
                 publisher.subscribe(noteData1 -> {
                     noteSource.addNoteData(noteData1);
                     adapter.notifyItemChanged(noteSource.size() - 1);
@@ -90,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
                             noteSource.clearNoteData();
                             adapter.notifyDataSetChanged();
                         })
-                        .setNegativeButton("No", (dialog, which) -> {
-                            Toast.makeText(MainActivity.this, "Notes not deleted", Toast.LENGTH_SHORT).show();
-                        })
+                        .setNegativeButton("No", (dialog, which) -> Toast.makeText(MainActivity.this, "Notes not deleted", Toast.LENGTH_SHORT).show())
                         .show();
                 return true;
         }
@@ -109,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_update:
-                NoteData noteData = noteSource.getNoteData(currentPosition);
-                noteData.setId(noteSource.getNoteData(currentPosition).getId());
-                navigation.addFragment(NoteFragment.newInstance(noteData), true);
+                NoteDataKotlin noteData = noteSource.getNoteData(currentPosition);
+                ((NoteDataKotlin) noteData).setId(noteSource.getNoteData(currentPosition).getId());
+                navigation.addFragment(NoteFragmentKotlin.Companion.newInstance(noteData), true);
                 publisher.subscribe(noteData1 -> {
                     noteSource.updateNoteData(currentPosition, noteData1);
                     adapter.notifyItemChanged(currentPosition);

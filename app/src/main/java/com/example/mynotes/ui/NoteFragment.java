@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 
 import com.example.mynotes.data.NoteData;
+import com.example.mynotes.data.NoteDataKotlin;
 import com.example.mynotes.utils.Publisher;
 import com.example.mynotes.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,7 +26,7 @@ public class NoteFragment extends Fragment {
 
     private static final String ARG_NOTE_DATA = "Param_NoteData";
 
-    private NoteData noteData;      // Данные по карточке
+    private NoteDataKotlin noteData;      // Данные по карточке
     private Publisher publisher;    // Паблишер, с его помощью обмениваемся данными
 
     private TextInputEditText title;
@@ -34,7 +35,7 @@ public class NoteFragment extends Fragment {
     private DatePicker datePicker;
 
     // Для редактирования данных
-    public static NoteFragment newInstance(NoteData noteData) {
+    public static NoteFragment newInstance(NoteDataKotlin noteData) {
         NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_NOTE_DATA, noteData);
@@ -94,18 +95,18 @@ public class NoteFragment extends Fragment {
         publisher.notifySingle(noteData);
     }
 
-    private NoteData collectNoteData() {
+    private NoteDataKotlin collectNoteData() {
         String title = Objects.requireNonNull(this.title.getText()).toString();
         String description = Objects.requireNonNull(this.description.getText()).toString();
         Date date = getDateFromDatePicker();
         boolean executed = this.executed.isChecked();
         if (noteData != null) {
-            NoteData answer;
-            answer = new NoteData(title, description, executed, date);
+            NoteDataKotlin answer;
+            answer = new NoteDataKotlin(title, description, executed, date);
             answer.setId(noteData.getId());
             return answer;
         } else {
-            return new NoteData(title, description, false, date);
+            return new NoteDataKotlin(title, description, false, date);
         }
     }
 

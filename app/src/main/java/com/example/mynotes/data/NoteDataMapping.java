@@ -7,16 +7,17 @@ import java.util.Map;
 
 public class NoteDataMapping {
 
-    public static class Fields{
+    public static class Fields {
         public final static String DATE = "date";
         public final static String TITLE = "title";
         public final static String DESCRIPTION = "description";
         public final static String EXECUTED = "executed";
     }
 
-    public static NoteData toNoteData(String id, Map<String, Object> doc) {
-        Timestamp timeStamp = (Timestamp)doc.get(Fields.DATE);
-        NoteData answer = new NoteData((String) doc.get(Fields.TITLE),
+    public static NoteDataKotlin toNoteData(String id, Map<String, Object> doc) {
+        Timestamp timeStamp = (Timestamp) doc.get(Fields.DATE);
+        assert timeStamp != null;
+        NoteDataKotlin answer = new NoteDataKotlin((String) doc.get(Fields.TITLE),
                 (String) doc.get(Fields.DESCRIPTION),
                 (boolean) doc.get(Fields.EXECUTED),
                 timeStamp.toDate());
@@ -24,7 +25,7 @@ public class NoteDataMapping {
         return answer;
     }
 
-    public static Map<String, Object> toDocument(NoteData noteData){
+    public static Map<String, Object> toDocument(NoteDataKotlin noteData) {
         Map<String, Object> answer = new HashMap<>();
         answer.put(Fields.TITLE, noteData.getTitle());
         answer.put(Fields.DESCRIPTION, noteData.getDescription());

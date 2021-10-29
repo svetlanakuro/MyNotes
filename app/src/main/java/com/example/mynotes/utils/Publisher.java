@@ -1,6 +1,7 @@
 package com.example.mynotes.utils;
 
 import com.example.mynotes.data.NoteData;
+import com.example.mynotes.data.NoteDataKotlin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Publisher {
     }
 
     // Разослать событие
-    public void notifySingle(NoteData noteData) {
+    public void notifySingle(NoteDataKotlin noteData) {
         for (Observer observer : observers) {
             observer.updateNoteData(noteData);
             unsubscribe(observer);

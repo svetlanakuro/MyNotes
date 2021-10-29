@@ -14,7 +14,7 @@ import java.util.List;
 public class NoteSourceImpl implements NoteSource {
 
     private Context context;
-    private List<NoteData> notes;
+    private List<NoteDataKotlin> notes;
 
     public NoteSourceImpl(Context context) {
         this.context = context;
@@ -23,37 +23,37 @@ public class NoteSourceImpl implements NoteSource {
     @Override
     public NoteSource init(NoteSourceResponse response) {
         notes = new ArrayList<>(Arrays.asList(
-                new NoteData(
+                new NoteDataKotlin(
                         context.getResources().getString(R.string.title1),
                         context.getResources().getString(R.string.description1),
                         false,
                         Calendar.getInstance().getTime()
                 ),
-                new NoteData(
+                new NoteDataKotlin(
                         context.getResources().getString(R.string.title2),
                         context.getResources().getString(R.string.description2),
                         false,
                         Calendar.getInstance().getTime()
                 ),
-                new NoteData(
+                new NoteDataKotlin(
                         context.getResources().getString(R.string.title3),
                         context.getResources().getString(R.string.description3),
                         false,
                         Calendar.getInstance().getTime()
                 ),
-                new NoteData(
+                new NoteDataKotlin(
                         context.getResources().getString(R.string.title4),
                         context.getResources().getString(R.string.description4),
                         false,
                         Calendar.getInstance().getTime()
                 ),
-                new NoteData(
+                new NoteDataKotlin(
                         context.getResources().getString(R.string.title5),
                         context.getResources().getString(R.string.description5),
                         false,
                         Calendar.getInstance().getTime()
                 ),
-                new NoteData(
+                new NoteDataKotlin(
                         context.getResources().getString(R.string.title6),
                         context.getResources().getString(R.string.description6),
                         false,
@@ -67,7 +67,7 @@ public class NoteSourceImpl implements NoteSource {
     }
 
     @Override
-    public NoteData getNoteData(int position) {
+    public NoteDataKotlin getNoteData(int position) {
         return notes.get(position);
     }
 
@@ -77,12 +77,12 @@ public class NoteSourceImpl implements NoteSource {
     }
 
     @Override
-    public void updateNoteData(int position, NoteData noteData) {
+    public void updateNoteData(int position, NoteDataKotlin noteData) {
         notes.set(position, noteData);
     }
 
     @Override
-    public void addNoteData(NoteData noteData) {
+    public void addNoteData(NoteDataKotlin noteData) {
         notes.add(noteData);
     }
 

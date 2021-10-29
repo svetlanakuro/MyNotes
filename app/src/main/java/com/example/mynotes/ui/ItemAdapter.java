@@ -10,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mynotes.data.NoteData;
+import com.example.mynotes.data.NoteDataKotlin;
 import com.example.mynotes.domain.NoteSource;
 import com.example.mynotes.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
@@ -34,7 +36,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new ItemViewHolder(view);
     }
-
 
 
     @Override
@@ -64,11 +65,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             title.setOnClickListener(v -> listener.onItemClick(description, getLayoutPosition()));
         }
 
-        public void bind(NoteData noteData) {
+        public void bind(NoteDataKotlin noteData) {
             title.setText(noteData.getTitle());
             description.setText(noteData.getDescription());
             executed.setChecked(noteData.isExecuted());
-            date.setText(new SimpleDateFormat("dd-MM-yy").format(noteData.getDate()));
+            date.setText(new SimpleDateFormat("dd-MM-yy").format(Objects.requireNonNull(noteData.getDate())));
         }
     }
 
